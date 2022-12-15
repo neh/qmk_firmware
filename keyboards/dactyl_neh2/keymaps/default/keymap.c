@@ -16,9 +16,23 @@
 /* #define LN_V LT(4, KC_V) */
 /* #define LN_M LT(4, KC_M) */
 
-#define CTLESC CTL_T(KC_ESC)
+#define CTL_ESC CTL_T(KC_ESC)
 #define NMSSPC LT(_NUMSYM, KC_SPC)
+#define NMS_ENT LT(_NUMSYM, KC_ENT)
 #define MOUSTAB LT(_MOUSE, KC_TAB)
+#define MOUSESC LT(_MOUSE, KC_ESC)
+#define NUM_ESC LT(_NUMSYM, KC_ESC)
+#define NAVSPC LT(_NAV, KC_SPC)
+
+#define OK_LSFT OSM(MOD_LSFT)
+#define OK_LALT OSM(MOD_LALT)
+#define OK_LCTL OSM(MOD_LCTL)
+#define OK_LGUI OSM(MOD_LGUI)
+
+#define OK_MOUS OSL(_MOUSE)
+
+#define OK_GUST OSM(MOD_LGUI | MOD_LSFT)
+#define OK_GUCT OSM(MOD_LGUI | MOD_LCTL)
 
 
 #define _BASE 0
@@ -33,22 +47,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,
           DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,    DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,
                    _______, _______,                                     _______, _______,
-                            MOUSTAB, MO(_NAV),                   NMSSPC, KC_LGUI,
-                                     CTLESC,  KC_LSFT,  _______, KC_ENT,
-                                     KC_LALT, _______,  _______, KC_BSPC
+                            OK_LGUI, OSL(_NAV),                     KC_SPC, OSL(_NUMSYM),
+                          /* OSL(_NAV), KC_SPC,                     OSL(_NUMSYM), OK_LGUI, */
+                                     OK_LCTL, OK_MOUS,  _______, KC_ENT,
+                                     NUM_ESC, KC_ESC,   _______, KC_BSPC
     ),
     [_NAV] = LAYOUT(
-          QK_BOOT, _______, _______, _______, _______,  C(DV_R), CS_TAB,  KC_PGDN, KC_PGUP, C_TAB,
-          KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_VOLU,  CAPSWRD, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,
+          QK_BOOT, _______, _______, OK_GUST, _______,  C(DV_R), CS_TAB,  KC_PGDN, KC_PGUP, C_TAB,
+          OK_LGUI, OK_LALT, OK_LCTL, OK_LSFT, KC_VOLU,  CAPSWRD, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,
           KC_MPRV, KC_MUTE, KC_MPLY, KC_MNXT, KC_VOLD,  C(DV_L), _______, KC_END,  KC_HOME, _______,
                    _______, _______,                                      _______, _______,
-                            _______, _______,                    _______, LGUI(KC_TAB),
+                            _______, _______,                    _______, _______,
                                      _______, _______,  _______, CAPSWRD,
                                      _______, _______,  _______, KC_DEL
     ),
     [_NUMSYM] = LAYOUT(
-          DV_LBRC, KC_4,    KC_5,    KC_6,    DV_RBRC,  _______, _______, _______, _______, QK_BOOT,
-          KC_0,    KC_1,    KC_2,    KC_3,    DV_SLSH,  _______, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
+          DV_LBRC, KC_4,    KC_5,    KC_6,    DV_RBRC,  _______, OK_GUST, OK_GUCT, _______, QK_BOOT,
+          KC_0,    KC_1,    KC_2,    KC_3,    DV_SLSH,  CAPSWRD, OK_LSFT, OK_LCTL, OK_LALT, OK_LGUI,
           DV_EQL,  KC_7,    KC_8,    KC_9,    DV_GRV,   _______, _______, _______, _______, _______,
                    _______, _______,                                      _______, _______,
                             DV_BSLS, DV_DOT,                     _______, _______,
@@ -57,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_MOUSE] = LAYOUT(
           QK_BOOT, _______, _______, _______, _______,  _______, _______, KC_WH_D, KC_WH_U, _______,
-          KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,  _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,
+          OK_LGUI, OK_LALT, OK_LCTL, OK_LSFT, CAPSWRD,  _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,
           _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______,
                    _______, _______,                                      _______, _______,
                             _______, _______,                    KC_BTN1, KC_BTN2,
@@ -66,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [4] = LAYOUT(
           KC_F11,  KC_F4,   KC_F5,   KC_F6,   _______,  _______, _______, _______, _______, QK_BOOT,
-          KC_F10,  KC_F1,   KC_F2,   KC_F3,   _______,  _______, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
+          KC_F10,  KC_F1,   KC_F2,   KC_F3,   _______,  CAPSWRD, OK_LSFT, OK_LCTL, OK_LALT, OK_LGUI,
           KC_F12,  KC_F7,   KC_F8,   KC_F9,   _______,  _______, _______, _______, _______, _______,
                    _______, _______,                                      _______, _______,
                             _______, _______,                    _______, _______,
@@ -75,17 +90,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-/* uint16_t get_autoshift_timeout(uint16_t keycode, keyrecord_t *record) { */
-/*     switch(keycode) { */
-/*         case AUTO_SHIFT_NUMERIC: */
-/*             return 2 * get_generic_autoshift_timeout(); */
-/*         case AUTO_SHIFT_SPECIAL: */
-/*             return get_generic_autoshift_timeout() + 50; */
-/*         case AUTO_SHIFT_ALPHA: */
-/*         default: */
-/*             return get_generic_autoshift_timeout(); */
-/*     } */
-/* } */
+uint16_t get_autoshift_timeout(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+        case DV_QUOT:
+        case DV_A:
+        case DV_SCLN:
+        case DV_L:
+        case DV_S:
+        case DV_Z:
+            return get_generic_autoshift_timeout() + 15;
+        /* case AUTO_SHIFT_NUMERIC: */
+        /*     return 2 * get_generic_autoshift_timeout(); */
+        /* case AUTO_SHIFT_SPECIAL: */
+        /*     return get_generic_autoshift_timeout() + 50; */
+        /* case AUTO_SHIFT_ALPHA: */
+        default:
+            return get_generic_autoshift_timeout();
+    }
+}
 
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
@@ -112,3 +134,20 @@ bool caps_word_press_user(uint16_t keycode) {
             return false;  // Deactivate Caps Word.
     }
 }
+
+const uint16_t PROGMEM dash_combo[] = {DV_J, DV_K, COMBO_END};
+/* const uint16_t PROGMEM esc_combo[] = {DV_Q, DV_J, COMBO_END}; */
+const uint16_t PROGMEM ctl_x_combo[] = {DV_M, DV_W, COMBO_END};
+const uint16_t PROGMEM ctl_c_combo[] = {DV_G, DV_C, COMBO_END};
+const uint16_t PROGMEM tab_combo[] = {DV_W, DV_V, COMBO_END};
+/* const uint16_t PROGMEM lctl_combo[] = {DV_O, DV_E, COMBO_END}; */
+/* const uint16_t PROGMEM rctl_combo[] = {DV_T, DV_N, COMBO_END}; */
+combo_t key_combos[COMBO_COUNT] = {
+    COMBO(dash_combo, DV_MINS),
+    /* COMBO(esc_combo, KC_ESC), */
+    COMBO(ctl_x_combo, LCTL(DV_X)),
+    COMBO(ctl_c_combo, LCTL(DV_C)),
+    COMBO(tab_combo, KC_TAB),
+    /* COMBO(lctl_combo, OK_LCTL), */
+    /* COMBO(rctl_combo, OK_LCTL), */
+};

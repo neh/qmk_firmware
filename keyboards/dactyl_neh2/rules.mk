@@ -20,3 +20,4 @@ HD44780_ENABLE = no 		# Enable support for HD44780 based LCDs (+400)
 
 AUTO_SHIFT_ENABLE = yes
 CAPS_WORD_ENABLE = yes
+COMBO_ENABLE = yes
